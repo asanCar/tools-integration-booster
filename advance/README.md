@@ -7,10 +7,10 @@ Before you can deploy Nexus you need:
 - docker-compose [https://docs.docker.com/compose/install/]
 
 ## Deploy 
+> You will have to wait until Nexus is configured. To check if Nexus is ready you can run `docker ps -a`. Nexus will be available when **nexus** container _STATUS_ is "healthy" and **provisioner** is "exited".
 ```sh
 docker-compose build && docker-compose up -d
 ```
-> You will have to wait until Nexus is configured. To check if Nexus is ready you can run `docker ps -a`. Nexus will be available when **nexus** container _STATUS_ is "healthy" and **provisioner** is "exited".
 
 ## Login to Docker registry
 > Default credentials for Nexus are: *admin/admin123*
