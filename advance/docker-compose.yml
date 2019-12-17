@@ -4,8 +4,9 @@ services:
     container_name: nexus
     image: sonatype/nexus3
     ports:
-      - "8082:8082"
-      - "8081:8081"
+      - "8081:8081" # artifacts
+      - "8082:8082" # docker pull (group registry)
+      - "8083:8083" # docker push (private registry)
     logging:
       driver: "json-file"
       options:

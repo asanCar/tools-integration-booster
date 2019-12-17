@@ -18,6 +18,16 @@ docker-compose build && docker-compose up -d
 docker login -u admin -p admin123 localhost:8082
 ```
 
+## Pull image docker (e.g. mysql)
+```sh
+docker pull localhost:8082/mysql
+```
+
+## Push images to private repository
+```sh
+docker push localhost:8083/my-image
+```
+
 ## Customization
 
 ### Change default password
