@@ -4,6 +4,8 @@ services:
     container_name: jenkins
     build: 
       context: .
+      args:
+        DOCKER_GID: ${DOCKER_GID}
     ports:
       - "8180:8080"
       - "50000:50000"

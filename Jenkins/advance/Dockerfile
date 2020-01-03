@@ -16,6 +16,10 @@ RUN add-apt-repository \
 RUN apt-get update -qq \
     && apt-get install docker-ce -y
 RUN usermod -aG docker jenkins
+# Docker group workarround (https://github.com/jenkinsci/docker/issues/263)
+ARG DOCKER_GID
+RUN groupmod -g ${DOCKER_GID} docker
+
 USER jenkins
 
 # Jenkins initial configuration

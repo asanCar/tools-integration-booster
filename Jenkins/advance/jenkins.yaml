@@ -15,8 +15,8 @@ credentials:
     domainCredentials:
       - credentials:
           - basicSSHUserPrivateKey:
-              scope: SYSTEM
-              id: ssh_repository_credentials
+              scope: GLOBAL
+              id: ssh_repository_creds
               username: asanchez
               passphrase: ${SSH_KEY_PASSWORD}
               description: "SSH passphrase with private key file. Private key provided"
@@ -32,6 +32,7 @@ jobs:
           git {
             id('my-repository')
             remote('ssh://git@git.atsistemas.com:7999/~vjmadrid/local-infra-booster.git')
+            credentialsId('ssh_repository_creds')
             includes('test')
           }
         }
