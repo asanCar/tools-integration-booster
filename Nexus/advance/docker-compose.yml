@@ -38,3 +38,4 @@ volumes:
   nexus-data:
 networks: 
   nexus-net:
+    driver: local
