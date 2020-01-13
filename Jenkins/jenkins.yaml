@@ -17,7 +17,7 @@ credentials:
           - basicSSHUserPrivateKey:
               scope: GLOBAL
               id: ssh_repository_creds
-              username: asanchez
+              username: ${SSH_USERNAME}
               passphrase: ${SSH_KEY_PASSWORD}
               description: "SSH passphrase with private key file. Private key provided"
               privateKeySource:
@@ -31,7 +31,7 @@ jobs:
         branchSources {
           git {
             id('my-repository')
-            remote('ssh://git@git.atsistemas.com:7999/~vjmadrid/local-infra-booster.git')
+            remote('${GIT_SSH_REPOSITORY}')
             credentialsId('ssh_repository_creds')
             includes('test')
           }

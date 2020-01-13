@@ -11,7 +11,10 @@ services:
       - "50000:50000"
     environment:
       JENKINS_HOME: /var/jenkins_home
+      GIT_SSH_REPOSITORY: ${GIT_SSH_REPOSITORY}
+      SSH_USERNAME: ${SSH_USERNAME}
       SSH_PRIVATE_KEY: ${SSH_PRIVATE_KEY}
+      SSH_KEY_PASSWORD: ${SSH_KEY_PASSWORD}
     logging:
       driver: "json-file"
       options:
