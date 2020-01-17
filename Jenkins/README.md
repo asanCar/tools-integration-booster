@@ -1,7 +1,7 @@
 # Local deploy of Jenkins
 The aim of this document is to provide a guide to deploy a local Jenkins provisioned with the required plugins and Pipelines/Jobs to avoid user interaction with the application.
 
- Jenkins CasC (Configuration-as-Code) plugin in combination with Jenkins Job DSL plugin have been used to configure the initial Jenkins pipeline. You can customize this at [jenkins.yaml](jenkins.yaml)
+ Jenkins CasC (Configuration-as-Code) plugin in combination with Jenkins Job DSL plugin have been used to configure the initial Jenkins pipeline. You can customize this at [jenkins.yaml](jenkins.yaml). This multi-branch pipeline expects to find a Jenkinsfile at the repository's root folder, which has the pipeline's jobs to execute.
 
 ## Prerequisites
 Before you can deploy Nexus you need:
