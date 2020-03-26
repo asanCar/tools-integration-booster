@@ -1,0 +1,6 @@
+git
+job-dsl
+workflow-multibranch
+configuration-as-code
+ssh-credentials
+pipeline-model-definition

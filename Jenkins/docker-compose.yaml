@@ -1,0 +1,35 @@
+version: "3.7"
+services: 
+  jenkins:
+    container_name: jenkins
+    build: 
+      context: .
+      args:
+        DOCKER_GID: ${DOCKER_GID}
+    ports:
+      - "8180:8080"
+      - "50000:50000"
+    environment:
+      JENKINS_HOME: /var/jenkins_home
+      GIT_SSH_REPOSITORY: ${GIT_SSH_REPOSITORY}
+      SSH_USERNAME: ${SSH_USERNAME}
+      SSH_PRIVATE_KEY: ${SSH_PRIVATE_KEY}
+      SSH_KEY_PASSWORD: ${SSH_KEY_PASSWORD}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/login"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: always
+    volumes:
+      - jenkins_data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+volumes: 
+  jenkins_data:
+    driver: local

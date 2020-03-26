@@ -1,0 +1,59 @@
+jenkins:
+  systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code plugin\n\n"
+  numExecutors: 2
+  scmCheckoutRetryCount: 2
+  mode: NORMAL
+
+tool:
+  git:
+    installations:
+      - name: git
+        home: /usr/bin/git
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - basicSSHUserPrivateKey:
+              scope: GLOBAL
+              id: ssh_repository_creds
+              username: ${SSH_USERNAME}
+              passphrase: ${SSH_KEY_PASSWORD}
+              description: "SSH passphrase with private key file. Private key provided"
+              privateKeySource:
+                directEntry:
+                  privateKey: ${SSH_PRIVATE_KEY}
+
+jobs:
+  - script: >
+      multibranchPipelineJob('my-repository') {
+        description('My default Pipeline')
+        branchSources {
+          git {
+            id('my-repository')
+            remote('${GIT_SSH_REPOSITORY}')
+            credentialsId('ssh_repository_creds')
+            includes('test')
+          }
+        }
+        orphanedItemStrategy {
+          discardOldItems {
+            numToKeep(20)
+          }
+        }
+      }
+
+# unclassified:
+#   sonarglobalconfiguration:                  # mandatory
+#     buildWrapperEnabled: true
+#     installations:                           # mandatory
+#       - name: "TEST"                         # id of the SonarQube configuration - to be used in jobs
+#         serverUrl: "http://url:9000"
+#         credentialsId: token-sonarqube       # id of the credentials containing sonar auth token (since 2.9 version)
+#         mojoVersion: "mojoVersion"
+#         # additionalProperties: "blah=blah"
+#         # additionalAnalysisProperties: "additionalAnalysisProperties"
+#         triggers:
+#           skipScmCause: true
+#           skipUpstreamCause: true
+#           # envVar: "envVar"
